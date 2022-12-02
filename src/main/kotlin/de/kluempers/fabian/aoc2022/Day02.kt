@@ -11,39 +11,39 @@ private enum class RockPaperScissors(val value: Int) {
   PAPER(2),
   SCISSORS(3);
 
-  fun play(enemy : RockPaperScissors) = when(this) {
-    ROCK -> when(enemy) {
-      ROCK -> DRAW
-      PAPER -> LOSS
+  fun play(enemy: RockPaperScissors) = when (this) {
+    ROCK     -> when (enemy) {
+      ROCK     -> DRAW
+      PAPER    -> LOSS
       SCISSORS -> WIN
     }
-    PAPER -> when(enemy) {
-      ROCK -> WIN
-      PAPER -> DRAW
+    PAPER    -> when (enemy) {
+      ROCK     -> WIN
+      PAPER    -> DRAW
       SCISSORS -> LOSS
     }
-    SCISSORS -> when(enemy) {
-      ROCK -> LOSS
-      PAPER -> WIN
+    SCISSORS -> when (enemy) {
+      ROCK     -> LOSS
+      PAPER    -> WIN
       SCISSORS -> DRAW
     }
   }
 
-  fun pickForResult(result: GameResult) = when(this) {
-    ROCK -> when(result) {
+  fun pickForResult(result: GameResult) = when (this) {
+    ROCK     -> when (result) {
       LOSS -> SCISSORS
       DRAW -> ROCK
-      WIN -> PAPER
+      WIN  -> PAPER
     }
-    PAPER -> when(result) {
+    PAPER    -> when (result) {
       LOSS -> ROCK
       DRAW -> PAPER
-      WIN -> SCISSORS
+      WIN  -> SCISSORS
     }
-    SCISSORS -> when(result) {
+    SCISSORS -> when (result) {
       LOSS -> PAPER
       DRAW -> SCISSORS
-      WIN -> ROCK
+      WIN  -> ROCK
     }
   }
 }
@@ -58,14 +58,14 @@ private fun String.toRockPaperScissors() = when {
   this == "A" || this == "X" -> ROCK
   this == "B" || this == "Y" -> PAPER
   this == "C" || this == "Z" -> SCISSORS
-  else -> error("Can't map '$this' to ${RockPaperScissors::class.simpleName}")
+  else                       -> error("Can't map '$this' to ${RockPaperScissors::class.simpleName}")
 }
 
 private fun String.toGameResult() = when {
   this == "X" -> LOSS
   this == "Y" -> DRAW
   this == "Z" -> WIN
-  else -> error("Can't map '$this' to ${GameResult::class.simpleName}")
+  else        -> error("Can't map '$this' to ${GameResult::class.simpleName}")
 }
 
 private val inputPattern = Regex("([ABC])\\s([XYZ])\\s*")
