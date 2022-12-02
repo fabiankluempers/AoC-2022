@@ -76,24 +76,22 @@ private data class Game(val enemy: RockPaperScissors, val me: RockPaperScissors)
 
 private fun missingMatchGroup(): Nothing = error("Missing match group")
 
+private fun List<String>.playGames(myChoice: (String, RockPaperScissors) -> RockPaperScissors) = map {
+  with(inputPattern.matchEntire(it)?.groups) {
+    requireNotNull(this) { "$it doesn't match input pattern" }
+    val enemyChoice = get(1)?.value?.toRockPaperScissors() ?: missingMatchGroup()
+    val myChoiceString = get(2)?.value ?: missingMatchGroup()
+    Game(enemyChoice, myChoice(myChoiceString, enemyChoice))
+  }
+}.map(Game::result).sum()
+
 object Day02 : Puzzle, HasInput by inputReaderFor(2) {
 
-  override fun part1(): Any = input.map {
-    with(inputPattern.matchEntire(it)?.groups) {
-      requireNotNull(this) { "$it doesn't match input pattern" }
-      val enemyChoice = get(1)?.value?.toRockPaperScissors() ?: missingMatchGroup()
-      val myChoice = get(2)?.value?.toRockPaperScissors() ?: missingMatchGroup()
-      Game(enemyChoice, myChoice)
-    }
-  }.map(Game::result).sum()
+  override fun part1(): Any = input.playGames { rawInput, _ ->
+    rawInput.toRockPaperScissors()
+  }
 
-  override fun part2(): Any = input.map {
-    with(inputPattern.matchEntire(it)?.groups) {
-      requireNotNull(this) { "$it doesn't match input pattern" }
-      val enemyChoice = get(1)?.value?.toRockPaperScissors() ?: missingMatchGroup()
-      val desiredResult = get(2)?.value?.toGameResult() ?: missingMatchGroup()
-      Game(enemyChoice, enemyChoice.pickForResult(desiredResult))
-    }
-  }.map(Game::result).sum()
-
+  override fun part2(): Any = input.playGames { rawInput, enemyChoice ->
+    enemyChoice.pickForResult(rawInput.toGameResult())
+  }
 }
