@@ -1,9 +1,11 @@
+import de.kluempers.fabian.aoc2022.Day02
 import kotlin.time.ExperimentalTime
 import kotlin.time.TimedValue
 import kotlin.time.measureTimedValue
 
 val puzzles = listOf<Puzzle>(
   Day01,
+  Day02,
 )
 
 @OptIn(ExperimentalTime::class)
