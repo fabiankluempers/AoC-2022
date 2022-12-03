@@ -1,4 +1,5 @@
 import de.kluempers.fabian.aoc2022.Day02
+import de.kluempers.fabian.aoc2022.Day03
 import kotlin.time.ExperimentalTime
 import kotlin.time.TimedValue
 import kotlin.time.measureTimedValue
@@ -6,6 +7,7 @@ import kotlin.time.measureTimedValue
 val puzzles = listOf<Puzzle>(
   Day01,
   Day02,
+  Day03,
 )
 
 @OptIn(ExperimentalTime::class)
