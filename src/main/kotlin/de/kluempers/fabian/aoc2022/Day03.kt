@@ -3,7 +3,6 @@ package de.kluempers.fabian.aoc2022
 import HasInput
 import Puzzle
 import arrow.core.compose
-import flipCurried
 import head
 import inputReaderFor
 
