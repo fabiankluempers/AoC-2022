@@ -4,6 +4,7 @@ import HasInput
 import Puzzle
 import arrow.core.*
 import inputReaderFor
+import contains
 
 private typealias RangePair = Pair<IntRange, IntRange>
 
@@ -23,9 +24,7 @@ private fun toRangePair(input: String) : RangePair = input.split(",")
 private fun toRange(input : String) = input.split("-")
     .let { (lower, upper) -> lower.toInt()..upper.toInt() }
 
-private fun RangePair.rangesContained() =
-    (first.first in second && first.last in second) || (second.first in first && second.last in first)
-
+private fun RangePair.rangesContained() = first in second || second in first
 
 private fun RangePair.rangesOverlap() =
     if (first.first < second.first) first.last >= second.first

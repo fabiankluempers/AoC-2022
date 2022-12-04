@@ -10,3 +10,6 @@ fun <A,B,C> flipCurried(f : (A, B) -> C) : (B) -> (A) -> C = flip(f).curried()
 fun <T> head(iterable: Iterable<T>) = iterable.first()
 
 fun <T> tail(iterable: Iterable<T>) = iterable.drop(1)
+
+operator fun <T : Comparable<T>> ClosedRange<T>.contains(other: ClosedRange<T>) =
+    (start in other && endInclusive in other) || (other.start in this && other.endInclusive in this)
