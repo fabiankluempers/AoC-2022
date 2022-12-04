@@ -1,10 +1,7 @@
 package de.kluempers.fabian.aoc2022
 
-import HasInput
-import Puzzle
 import de.kluempers.fabian.aoc2022.GameResult.*
 import de.kluempers.fabian.aoc2022.RockPaperScissors.*
-import inputReaderFor
 
 private enum class RockPaperScissors(val value: Int) {
   ROCK(1),
@@ -76,7 +73,7 @@ private data class Game(val enemy: RockPaperScissors, val me: RockPaperScissors)
 
 private fun missingMatchGroup(): Nothing = error("Missing match group")
 
-private fun List<String>.playGames(myChoice: (String, RockPaperScissors) -> RockPaperScissors) = map {
+private fun Input.playGames(myChoice: (String, RockPaperScissors) -> RockPaperScissors) = map {
   with(inputPattern.matchEntire(it)?.groups) {
     requireNotNull(this) { "$it doesn't match input pattern" }
     val enemyChoice = get(1)?.value?.toRockPaperScissors() ?: missingMatchGroup()

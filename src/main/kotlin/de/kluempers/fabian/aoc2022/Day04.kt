@@ -1,10 +1,6 @@
 package de.kluempers.fabian.aoc2022
 
-import HasInput
-import Puzzle
 import arrow.core.*
-import inputReaderFor
-import contains
 
 private typealias RangePair = Pair<IntRange, IntRange>
 
@@ -14,7 +10,7 @@ object Day04 : Puzzle, HasInput by inputReaderFor(4) {
     override fun part2(): Any = input.countPairsWhere(RangePair::rangesOverlap)
 }
 
-private fun List<String>.countPairsWhere(predicate: (RangePair) -> Boolean) =
+private fun Input.countPairsWhere(predicate: (RangePair) -> Boolean) =
     count(predicate compose ::toRangePair)
 
 private fun toRangePair(input: String) : RangePair = input.split(",")

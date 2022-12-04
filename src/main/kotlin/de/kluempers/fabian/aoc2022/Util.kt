@@ -1,3 +1,5 @@
+package de.kluempers.fabian.aoc2022
+
 import arrow.core.curried
 import java.io.File
 

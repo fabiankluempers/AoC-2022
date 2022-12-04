@@ -1,3 +1,7 @@
+import de.kluempers.fabian.aoc2022.HasInput
+import de.kluempers.fabian.aoc2022.Input
+import de.kluempers.fabian.aoc2022.Puzzle
+import de.kluempers.fabian.aoc2022.inputReaderFor
 import kotlin.math.max
 
 object Day01 : Puzzle, HasInput by inputReaderFor(1) {
@@ -11,7 +15,7 @@ object Day01 : Puzzle, HasInput by inputReaderFor(1) {
 
 }
 
-private tailrec fun List<String>.toCaloriesPerElf(calories: List<Int> = listOf()): List<Int> =
+private tailrec fun Input.toCaloriesPerElf(calories: List<Int> = listOf()): List<Int> =
   if (isEmpty())
     calories
   else {

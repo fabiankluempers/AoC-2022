@@ -1,6 +1,6 @@
-import de.kluempers.fabian.aoc2022.Day02
-import de.kluempers.fabian.aoc2022.Day03
-import de.kluempers.fabian.aoc2022.Day04
+package de.kluempers.fabian.aoc2022
+
+import Day01
 import kotlin.time.ExperimentalTime
 import kotlin.time.TimedValue
 import kotlin.time.measureTimedValue
