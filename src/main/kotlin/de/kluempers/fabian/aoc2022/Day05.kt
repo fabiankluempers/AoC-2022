@@ -1,6 +1,6 @@
 package de.kluempers.fabian.aoc2022
 
-import arrow.core.compose
+import arrow.core.*
 
 object Day05 : Puzzle, HasInput by inputReaderFor(5) {
     override fun part1(): Any = input.solution(reverse = true)
@@ -33,6 +33,6 @@ private fun Input.getInstructions() = drop(10)
 private fun Input.getInitialCrateStacks() = (0..8).map(this::getCrateStack)
 
 private fun Input.getCrateStack(index: Int) = take(8).foldRight(listOf<Char>()) { line, list ->
-    val crate = line[4 * index + 1]
+    val crate = line.getOrNull(4 * index + 1) ?: ' '
     if (crate == ' ') list else list + crate
 }
