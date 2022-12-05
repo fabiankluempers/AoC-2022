@@ -17,8 +17,8 @@ private fun toRangePair(input: String) : RangePair = input.split(",")
     .map(::toRange)
     .let { (first, second) -> first to second }
 
-private fun toRange(input : String) = input.split("-")
-    .let { (lower, upper) -> lower.toInt()..upper.toInt() }
+private fun toRange(input : String) = input.split("-").map(String::toInt)
+    .let { (lower, upper) -> lower..upper }
 
 private fun RangePair.rangesContained() = first in second || second in first
 
