@@ -12,7 +12,7 @@ object Day06 : Puzzle, HasInput by inputReaderFor(6) {
 }
 
 private fun Input.solution(windowSize : Int) = first().asSequence()
-    .zip(generateSequence(1) { it + 1 })
+    .zip(generateSequence(1, add(1)))
     .windowed(windowSize)
     .first(eq(windowSize) compose ::length compose map(Pair<Char,Int>::first))
     .last().second
