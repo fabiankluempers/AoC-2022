@@ -1,6 +1,7 @@
 package de.kluempers.fabian.aoc2022
 
 import arrow.core.compose
+import de.kluempers.fabian.aoc2022.fp.head
 
 object Day03 : Puzzle, HasInput by inputReaderFor(3) {
     override fun part1(): Any = input

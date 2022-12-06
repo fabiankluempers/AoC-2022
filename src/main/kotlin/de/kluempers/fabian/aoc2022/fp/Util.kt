@@ -26,6 +26,12 @@ fun and(b : Boolean) = Boolean::and.curried()(b)
 
 fun or(b: Boolean) = Boolean::or.curried()(b)
 
+// Pair
+
+fun <T> first(pair : Pair<T,*>) = pair.first
+
+fun <T> second(pair : Pair<*,T>) = pair.second
+
 // region List/Iterable
 
 // basic
