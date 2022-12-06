@@ -1,5 +1,8 @@
 package de.kluempers.fabian.aoc2022
 
+import arrow.core.compose
+import de.kluempers.fabian.aoc2022.fp.*
+
 
 object Day06 : Puzzle, HasInput by inputReaderFor(6) {
     override fun part1(): Any = input.solution(4)
@@ -11,5 +14,5 @@ object Day06 : Puzzle, HasInput by inputReaderFor(6) {
 private fun Input.solution(windowSize : Int) = first().asSequence()
     .zip(generateSequence(1) { it + 1 })
     .windowed(windowSize)
-    .first { window -> window.map { it.first }.toSet().size == windowSize }
+    .first(eq(windowSize) compose ::length compose map(Pair<Char,Int>::first))
     .last().second
