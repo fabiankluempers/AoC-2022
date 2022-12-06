@@ -1,6 +1,8 @@
 package de.kluempers.fabian.aoc2022
 
 import arrow.core.*
+import de.kluempers.fabian.aoc2022.fp.map
+import de.kluempers.fabian.aoc2022.fp.tail
 
 object Day05 : Puzzle, HasInput by inputReaderFor(5) {
     override fun part1(): Any = input.solution(reverse = true)
@@ -8,7 +10,7 @@ object Day05 : Puzzle, HasInput by inputReaderFor(5) {
     override fun part2(): Any = input.solution(reverse = false)
 }
 
-private fun Input.solution(reverse: Boolean) = getInstructions()
+private fun Input.solution(reverse: Boolean) = getInstructions(this)
     .fold(getInitialCrateStacks()) { stacks, instruction -> instruction(stacks, reverse) }
     .map(List<Char>::last)
     .joinToString("")
@@ -25,9 +27,9 @@ private data class Instruction(val amount: Int, val from: Int, val to: Int) {
 
 private val inputPattern = Regex("move (\\d+) from (\\d+) to (\\d+)")
 
-private fun Input.getInstructions() = drop(10)
+private fun getInstructions(input : Input) = input.drop(10)
     .mapNotNull(inputPattern::matchEntire)
-    .map(fmap(String::toInt) compose ::tail compose MatchResult::groupValues)
+    .map(map(String::toInt) compose ::tail compose MatchResult::groupValues)
     .map { Instruction(it[0], it[1] - 1, it[2] - 1) }
 
 private fun Input.getInitialCrateStacks() = (0..8).map(this::getCrateStack)
