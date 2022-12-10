@@ -8,6 +8,14 @@ import arrow.core.uncurried
 
 fun <T> eq(a: T) = { b : T -> a == b }
 
+fun <T : Comparable<T>> gt(a: T) = { b : T -> a > b }
+
+fun <T : Comparable<T>> lt(a: T) = { b : T -> a < b }
+
+fun <T : Comparable<T>> gte(a: T) = { b : T -> a >= b }
+
+fun <T : Comparable<T>> lte(a: T) = { b : T -> a <= b }
+
 // ints
 
 fun add(a: Int) = { b : Int -> a + b }
@@ -41,45 +49,51 @@ fun <T> head(iterable: Iterable<T>) = iterable.first()
 
 fun <T> tail(iterable: Iterable<T>) = iterable.drop(1)
 
-fun <T> take(amount : Int) = { x : Iterable<T> -> x.take(amount) }
+fun <T> uncons(iterable: Iterable<T>) = head(iterable) to tail(iterable)
 
-fun <T> takeWhile(f: (T) -> Boolean) = { x : Iterable<T> -> x.takeWhile(f) }
+fun <T> take(amount : Int) = { iteratee : Iterable<T> -> iteratee.take(amount) }
 
-fun <T> drop(amount : Int) = { x : Iterable<T> -> x.drop(amount) }
+fun <T> takeWhile(f: (T) -> Boolean) = { iteratee : Iterable<T> -> iteratee.takeWhile(f) }
 
-fun <T> dropWhile(f: (T) -> Boolean) = { x : Iterable<T> -> x.dropWhile(f) }
+fun <T> takeLastWhile(f: (T) -> Boolean) = { iteratee : List<T> -> iteratee.takeLastWhile(f) }
+
+fun <T> drop(amount : Int) = { iteratee : Iterable<T> -> iteratee.drop(amount) }
+
+fun <T> dropWhile(f: (T) -> Boolean) = { iteratee : Iterable<T> -> iteratee.dropWhile(f) }
+
+fun <T> dropLastWhile(f: (T) -> Boolean) = { iteratee : List<T> -> iteratee.dropLastWhile(f) }
 
 // transformations
-fun <T,R> map(f: (T) -> R) = { x: Iterable<T> -> x.map(f) }
+fun <T,R> map(f: (T) -> R) = { iteratee: Iterable<T> -> iteratee.map(f) }
 
-fun <T> filter(f: (T) -> Boolean) = { x : Iterable<T> -> x.filter(f) }
+fun <T> filter(f: (T) -> Boolean) = { iteratee : Iterable<T> -> iteratee.filter(f) }
 
-fun <T,R> flatMap(f: (T) -> Iterable<R>) = { x: Iterable<T> -> x.flatMap(f) }
+fun <T,R> flatMap(f: (T) -> Iterable<R>) = { iteratee: Iterable<T> -> iteratee.flatMap(f) }
 
-fun <T> reverse(x : Iterable<T>) = x.reversed()
+fun <T> reverse(iteratee : Iterable<T>) = iteratee.reversed()
 
 fun <T> window(size: Int, step: Int = 1, partial : Boolean = false) =
-    { x : Iterable<T> -> x.windowed(size, step, partial) }
+    { iteratee : Iterable<T> -> iteratee.windowed(size, step, partial) }
 
 fun <T> distinct(iterable: Iterable<T>) = iterable.toSet()
 
 // folds
 
-fun <T,R> foldl(f : (R) -> (T) -> (R)) = { initial: R -> { x: Iterable<T> -> x.fold(initial, f.uncurried()) } }
+fun <T,R> foldl(f : (R) -> (T) -> (R)) = { initial: R -> { iteratee: Iterable<T> -> iteratee.fold(initial, f.uncurried()) } }
 
-fun <T,R> foldr(f : (T) -> (R) -> (R)) = { initial: R -> { x: List<T> -> x.foldRight(initial, f.uncurried()) } }
+fun <T,R> foldr(f : (T) -> (R) -> (R)) = { initial: R -> { iteratee: List<T> -> iteratee.foldRight(initial, f.uncurried()) } }
 
-fun <T> reduce(f: (T) -> (T) -> (T)) = { x: Iterable<T> -> x.reduce(f.uncurried()) }
+fun <T> reduce(f: (T) -> (T) -> (T)) = { iteratee: Iterable<T> -> iteratee.reduce(f.uncurried()) }
 
-fun sum(x : Iterable<Int>) = reduce(::add)
+fun sum(iteratee : Iterable<Int>) = reduce(::add)(iteratee)
 
-fun product(x : Iterable<Int>) = reduce(::mul)
+fun product(iteratee : Iterable<Int>) = reduce(::mul)(iteratee)
 
-fun <T> all(f: (T) -> Boolean) = { x: Iterable<T> -> x.all(f) }
+fun <T> all(f: (T) -> Boolean) = { iteratee: Iterable<T> -> iteratee.all(f) }
 
 fun <T> any(f: (T) -> Boolean) = all(::not compose f)
 
-fun <T> find(f: (T) -> Boolean) = { x: Iterable<T> -> x.find(f) }
+fun <T> find(f: (T) -> Boolean) = { iteratee: Iterable<T> -> iteratee.find(f) }
 
 // zips
 

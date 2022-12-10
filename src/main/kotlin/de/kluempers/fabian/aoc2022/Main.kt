@@ -12,6 +12,7 @@ val puzzles = listOf<Puzzle>(
   Day04,
   Day05,
   Day06,
+  Day07,
 )
 
 @OptIn(ExperimentalTime::class)
