@@ -26,22 +26,22 @@ object Day07 : Puzzle, HasInput by inputReaderFor(7) {
 
 }
 
-sealed interface FileSystem {
+private sealed interface FileSystem {
     val size: Long
 }
 
-data class File(val name: String, override val size: Long) : FileSystem {
+private data class File(val name: String, override val size: Long) : FileSystem {
     constructor(instruction: String) : this(
         instruction.dropWhile { it != ' ' }.drop(1),
         instruction.takeWhile { it != ' ' }.toLong()
     )
 }
 
-data class Dir(val name: String, override val size: Long, val contents: List<FileSystem>) : FileSystem {
+private data class Dir(val name: String, override val size: Long, val contents: List<FileSystem>) : FileSystem {
     constructor(name: String, contents: List<FileSystem>) : this(name, contents.sumOf(FileSystem::size), contents)
 }
 
-fun parseToFileSystem(
+private fun parseToFileSystem(
     instructions: Input,
     name: String,
     currentContents: List<FileSystem> = listOf()
@@ -66,15 +66,15 @@ fun parseToFileSystem(
     }
 }
 
-fun isCdDown(instruction: String): Boolean = !isCdUp(instruction) && instruction.startsWith("\$ cd")
+private fun isCdDown(instruction: String): Boolean = !isCdUp(instruction) && instruction.startsWith("\$ cd")
 
-fun dirName(instruction: String): String = instruction.drop(5)
+private fun dirName(instruction: String): String = instruction.drop(5)
 
-fun isFile(instruction: String): Boolean = instruction.first().isDigit()
+private fun isFile(instruction: String): Boolean = instruction.first().isDigit()
 
-fun isCdUp(instruction: String): Boolean = instruction.startsWith("\$ cd ..")
+private fun isCdUp(instruction: String): Boolean = instruction.startsWith("\$ cd ..")
 
-fun FileSystem.toList(): List<FileSystem> = when (this) {
+private fun FileSystem.toList(): List<FileSystem> = when (this) {
     is Dir -> listOf(this) + this.contents.flatMap(FileSystem::toList)
     is File -> listOf(this)
 }
