@@ -89,10 +89,10 @@ fun <T> window(size: Int, step: Int = 1, partial: Boolean = false) =
 
 fun <T> distinct(iterable: Iterable<T>) = iterable.toSet()
 
-fun <T> transpose(x: List<List<T>>): List<List<T>> = when {
-    x.any(List<T>::isEmpty) -> listOf()
-    else -> listOf(x.map(::head)) + transpose(x.map(::tail))
-}
+fun <T> transpose(matrix: List<List<T>>): List<List<T>> =
+    if (matrix.any(List<T>::isEmpty)) listOf()
+    else listOf(matrix.map(::head)) + transpose(matrix.map(::tail))
+
 
 // folds
 
@@ -120,7 +120,7 @@ fun <A, B, C> zipWith(f: (A) -> (B) -> C) = { a: Iterable<A> -> { b: Iterable<B>
 
 // set
 
-fun <T> intersect(a : Set<T>) = { b : Set<T> -> a intersect b }
+fun <T> intersect(a: Set<T>) = { b: Set<T> -> a intersect b }
 
 // endregion
 
