@@ -8,3 +8,4 @@ fun readInputFor(day : Int) = File("input/Day%02d.txt".format(day)).readLines()
 operator fun <T : Comparable<T>> ClosedRange<T>.contains(other: ClosedRange<T>) =
     (start in other && endInclusive in other) || (other.start in this && other.endInclusive in this)
 
+data class Vec2d(val x: Int, val y: Int)

@@ -3,9 +3,6 @@ package de.kluempers.fabian.aoc2022
 import arrow.core.compose
 import de.kluempers.fabian.aoc2022.fp.*
 
-
-private data class Vec2d(val x: Int, val y: Int)
-
 object Day08 : Puzzle, HasInput by inputReaderFor(8) {
     override fun part1(): Any {
         val m = indexedMatrix(input)
