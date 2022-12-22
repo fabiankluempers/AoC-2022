@@ -1,8 +1,12 @@
-package de.kluempers.fabian.aoc2022
+package de.kluempers.fabian.aoc2022.day05
 
 import arrow.core.*
+import de.kluempers.fabian.aoc2022.HasInput
+import de.kluempers.fabian.aoc2022.Input
+import de.kluempers.fabian.aoc2022.Puzzle
 import de.kluempers.fabian.aoc2022.fp.map
 import de.kluempers.fabian.aoc2022.fp.tail
+import de.kluempers.fabian.aoc2022.inputReaderFor
 
 object Day05 : Puzzle, HasInput by inputReaderFor(5) {
     override fun part1(): Any = input.solution(reverse = true)

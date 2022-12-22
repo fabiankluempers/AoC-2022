@@ -1,7 +1,10 @@
-package de.kluempers.fabian.aoc2022
+package de.kluempers.fabian.aoc2022.day06
 
 import arrow.core.compose
+import de.kluempers.fabian.aoc2022.HasInput
+import de.kluempers.fabian.aoc2022.Puzzle
 import de.kluempers.fabian.aoc2022.fp.*
+import de.kluempers.fabian.aoc2022.inputReaderFor
 
 
 object Day06 : Puzzle, HasInput by inputReaderFor(6) {

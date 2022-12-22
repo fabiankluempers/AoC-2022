@@ -1,6 +1,7 @@
-package de.kluempers.fabian.aoc2022
+package de.kluempers.fabian.aoc2022.day08
 
 import arrow.core.compose
+import de.kluempers.fabian.aoc2022.*
 import de.kluempers.fabian.aoc2022.fp.*
 
 object Day08 : Puzzle, HasInput by inputReaderFor(8) {

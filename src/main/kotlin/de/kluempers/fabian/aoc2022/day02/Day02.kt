@@ -1,7 +1,11 @@
-package de.kluempers.fabian.aoc2022
+package de.kluempers.fabian.aoc2022.day02
 
-import de.kluempers.fabian.aoc2022.GameResult.*
-import de.kluempers.fabian.aoc2022.RockPaperScissors.*
+import de.kluempers.fabian.aoc2022.HasInput
+import de.kluempers.fabian.aoc2022.Input
+import de.kluempers.fabian.aoc2022.Puzzle
+import de.kluempers.fabian.aoc2022.day02.GameResult.*
+import de.kluempers.fabian.aoc2022.day02.RockPaperScissors.*
+import de.kluempers.fabian.aoc2022.inputReaderFor
 
 private enum class RockPaperScissors(val value: Int) {
   ROCK(1),

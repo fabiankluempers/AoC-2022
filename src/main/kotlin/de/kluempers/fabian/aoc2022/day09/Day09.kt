@@ -1,25 +1,29 @@
-package de.kluempers.fabian.aoc2022
+package de.kluempers.fabian.aoc2022.day09
 
+import de.kluempers.fabian.aoc2022.HasInput
+import de.kluempers.fabian.aoc2022.Puzzle
+import de.kluempers.fabian.aoc2022.Vec2d
 import de.kluempers.fabian.aoc2022.fp.uncons
+import de.kluempers.fabian.aoc2022.inputReaderFor
 import kotlin.math.abs
 
 // Yes this solution has very poor performance and is hard to read, but I won't fix it.
 object Day09 : Puzzle, HasInput by inputReaderFor(9) {
     override fun part1(): Any = input.map {
         val (direction, value) = it.split(" ")
-        Day09Instruction(Direction.valueOf(direction.first()), value.toInt())
-    }.fold(PositionState.initial to setOf(Vec2d(0,0))) { (state, visited), instruction: Day09Instruction ->
+        Instruction(Direction.valueOf(direction.first()), value.toInt())
+    }.fold(PositionState.initial to setOf(Vec2d(0,0))) { (state, visited), instruction: Instruction ->
         state.moveHead(instruction).followHead().let { it to visited + it.tailPosition }
     }.second.size
 
     override fun part2(): Any = input.map {
         val (direction, value) = it.split(" ")
-        Day09Instruction(Direction.valueOf(direction.first()), value.toInt())
+        Instruction(Direction.valueOf(direction.first()), value.toInt())
     }.fold(part2InitialPositions() to setOf(Vec2d(0,0)), FoldState::executeInstruction).second.size
 }
 
 private typealias FoldState = Pair<List<Vec2d>, Set<Vec2d>>
-private tailrec fun FoldState.executeInstruction(instruction: Day09Instruction): FoldState {
+private tailrec fun FoldState.executeInstruction(instruction: Instruction): FoldState {
     if (instruction.value == 0) return this
     val (head, tail) = uncons(first)
     val newHeadPos = head.move(1, instruction.direction)
@@ -44,10 +48,10 @@ private enum class Direction {
     }
 }
 
-private fun PositionState.moveHead(instruction: Day09Instruction) =
+private fun PositionState.moveHead(instruction: Instruction) =
     copy(headPosition = headPosition.move(instruction.value, instruction.direction))
 
-private data class Day09Instruction(val direction: Direction, val value: Int)
+private data class Instruction(val direction: Direction, val value: Int)
 
 private fun Vec2d.move(value: Int, direction: Direction) = when (direction) {
     Direction.LEFT -> moveOnX(-value)

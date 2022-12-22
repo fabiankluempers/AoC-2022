@@ -1,6 +1,10 @@
-package de.kluempers.fabian.aoc2022
+package de.kluempers.fabian.aoc2022.day07
 
+import de.kluempers.fabian.aoc2022.HasInput
+import de.kluempers.fabian.aoc2022.Input
+import de.kluempers.fabian.aoc2022.Puzzle
 import de.kluempers.fabian.aoc2022.fp.uncons
+import de.kluempers.fabian.aoc2022.inputReaderFor
 
 object Day07 : Puzzle, HasInput by inputReaderFor(7) {
     override fun part1(): Any = parseToFileSystem(input.drop(1), "/").second.toList()

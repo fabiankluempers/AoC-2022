@@ -1,6 +1,7 @@
-package de.kluempers.fabian.aoc2022
+package de.kluempers.fabian.aoc2022.day04
 
 import arrow.core.*
+import de.kluempers.fabian.aoc2022.*
 
 private typealias RangePair = Pair<IntRange, IntRange>
 

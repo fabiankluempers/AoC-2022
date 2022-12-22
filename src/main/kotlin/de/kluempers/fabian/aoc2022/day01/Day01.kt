@@ -1,3 +1,5 @@
+package de.kluempers.fabian.aoc2022.day01
+
 import de.kluempers.fabian.aoc2022.HasInput
 import de.kluempers.fabian.aoc2022.Input
 import de.kluempers.fabian.aoc2022.Puzzle
